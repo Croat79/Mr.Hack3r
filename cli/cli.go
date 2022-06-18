@@ -31,7 +31,7 @@ func Cli() {
 	fmt.Println(Colors.Red(), "\n\n--------------------------------------------------------------------------------------------------")
 	fmt.Println(Colors.Red(), "\nCracking Modules:")
 
-	fmt.Println(Colors.Red(), "\n\n["+Colors.White()+"1"+Colors.Red()+"]", Colors.White(), " Zip Cracker")
+	fmt.Println(Colors.Red(), "\n\n["+Colors.White()+"1"+Colors.Red()+"]", Colors.White(), " Zip Cracker", Colors.Red(), "\t\t["+Colors.White()+"2"+Colors.Red()+"]", Colors.White(), " TCP Scanner")
 
 	fmt.Println(Colors.Red(), "\n\n["+Colors.White()+"0"+Colors.Red()+"]", " Exit")
 
@@ -66,9 +66,17 @@ func Cli() {
 			fmt.Scanf("%d", &concurrency)
 
 			controllers.ZipCracker(zipFile, dictonary, concurrency)
+
 			validated = true
 
 		case 2:
+			helpers.ClearScreen()
+
+			fmt.Println(Colors.Red(), "\n\nEnter the target IP: ", Colors.White())
+			var target string
+			fmt.Scanf("%s", &target)
+
+			controllers.TCPScanner(target)
 
 			validated = true
 
