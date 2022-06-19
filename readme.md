@@ -27,6 +27,12 @@ clone the project
 git clone git@github.com:muhammadqazi/Mr.Hack3r.git
 ```
 
+Install the dependencies
+
+```
+go mod tidy
+```
+
 Run the project
 
 ```
