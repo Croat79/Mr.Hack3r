@@ -31,7 +31,9 @@ func Cli() {
 	fmt.Println(Colors.Red(), "\n\n--------------------------------------------------------------------------------------------------")
 	fmt.Println(Colors.Red(), "\nCracking Modules:")
 
-	fmt.Println(Colors.Red(), "\n\n["+Colors.White()+"1"+Colors.Red()+"]", Colors.White(), " Zip Cracker", Colors.Red(), "\t\t["+Colors.White()+"2"+Colors.Red()+"]", Colors.White(), " TCP Scanner")
+	fmt.Println(Colors.Red(), "\n\n["+Colors.White()+"1"+Colors.Red()+"]", Colors.White(), " Zip Cracker",
+		Colors.Red(), "\t\t["+Colors.White()+"2"+Colors.Red()+"]", Colors.White(), " TCP Scanner",
+		Colors.Red(), "\t\t["+Colors.White()+"3"+Colors.Red()+"]", Colors.White(), " SSH Cracker")
 
 	fmt.Println(Colors.Red(), "\n\n["+Colors.White()+"0"+Colors.Red()+"]", " Exit")
 
@@ -65,9 +67,18 @@ func Cli() {
 			fmt.Println(Colors.Red(), "\nEnter the number of concurrency (default 8)", Colors.White())
 			fmt.Scanf("%d", &concurrency)
 
-			controllers.ZipCracker(zipFile, dictonary, concurrency)
+			if zipFile == "" || dictonary == "" || concurrency == 0 {
 
-			validated = true
+				fmt.Println("Failed: Missing file name")
+
+				validated = true
+
+			} else {
+
+				controllers.ZipCracker(zipFile, dictonary, concurrency)
+
+				validated = true
+			}
 
 		case 2:
 			helpers.ClearScreen()
@@ -76,9 +87,53 @@ func Cli() {
 			var target string
 			fmt.Scanf("%s", &target)
 
-			controllers.TCPScanner(target)
+			if target == "" {
 
-			validated = true
+				fmt.Println("Failed: Missing Target IP")
+
+				validated = true
+
+			} else {
+
+				controllers.TCPScanner(target)
+
+				validated = true
+			}
+
+		case 3:
+			helpers.ClearScreen()
+
+			var (
+				host string
+				port string
+				user string
+				pass string
+			)
+
+			fmt.Println(Colors.Red(), "\n\nEnter the Host: ", Colors.White())
+			fmt.Scanf("%s", &host)
+
+			fmt.Println(Colors.Red(), "\nEnter the Port: ", Colors.White())
+			fmt.Scanf("%s", &port)
+
+			fmt.Println(Colors.Red(), "\nEnter the User: ", Colors.White())
+			fmt.Scanf("%s", &user)
+
+			fmt.Println(Colors.Red(), "\nEnter the location for password dictonary: ", Colors.White())
+			fmt.Scanf("%s", &pass)
+
+			if host == "" || port == "" || user == "" || pass == "" {
+
+				fmt.Println("Failed: Missing Information")
+
+				validated = true
+
+			} else {
+
+				controllers.SSHCracker(host, port, user, pass)
+
+				validated = true
+			}
 
 		case 0:
 			fmt.Println("Mr.Hack3r is out")
