@@ -35,6 +35,8 @@ func Cli() {
 		Colors.Red(), "\t\t["+Colors.White()+"2"+Colors.Red()+"]", Colors.White(), " TCP Scanner",
 		Colors.Red(), "\t\t["+Colors.White()+"3"+Colors.Red()+"]", Colors.White(), " SSH Cracker")
 
+	fmt.Println(Colors.Red(), "\n\n["+Colors.White()+"4"+Colors.Red()+"]", Colors.White(), " Net Scan")
+
 	fmt.Println(Colors.Red(), "\n\n["+Colors.White()+"0"+Colors.Red()+"]", " Exit")
 
 	fmt.Print(Colors.Red(), "\n\n┌─[ "+Colors.Green()+"Mr.Hack3r"+Colors.Blue()+"~"+Colors.White()+"@HOME"+Colors.Red()+" ]"+"\n└──╼ "+Colors.White())
@@ -131,6 +133,27 @@ func Cli() {
 			} else {
 
 				controllers.SSHCracker(host, port, user, pass)
+
+				validated = true
+			}
+
+		case 4:
+			helpers.ClearScreen()
+
+			fmt.Println(Colors.Red(), "\n\nEnter the First three octets. Ex: 192.168.0", Colors.White())
+
+			var ip string
+			fmt.Scanf("%s", &ip)
+
+			if ip == "" {
+
+				fmt.Println("Failed: Missing IP")
+
+				validated = true
+
+			} else {
+
+				controllers.NetScan(ip)
 
 				validated = true
 			}
